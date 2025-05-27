@@ -1,7 +1,15 @@
 import express from 'express';
+import helmet from 'helmet';
+import noCache from 'nocache';
 
 const app = express();
 const port = 3000;
+
+{ // 보안
+  app.use(helmet.hidePoweredBy());
+  app.use(helmet.xssFilter());
+  app.use(noCache());
+}
 
 // '/' 경로로 GET 요청이 왔을 때 실행될 함수를 정의합니다.
 app.get('/', (req, res) => {
